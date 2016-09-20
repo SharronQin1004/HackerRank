@@ -1,0 +1,63 @@
+using System;
+using System.Collections.Generic;
+using System.Linq;
+using System.Text;
+using System.Text.RegularExpressions;
+using System.Threading.Tasks;
+
+namespace ConsoleApplication1
+{
+    class Program
+    {
+        static void Main(string[] args)
+        {
+            int n = Convert.ToInt32(Console.ReadLine());
+            string s = Console.ReadLine();
+            int k = Convert.ToInt32(Console.ReadLine());           
+            Console.WriteLine(RotateString(s, k));
+            Console.ReadKey();
+        }
+
+        private static string RotateString(string s, int k)
+        {
+            int newK = k%('z' - 'a' +1);
+            char[] rotatedCharArray = new char[s.Length];
+            for (int i =0;i<s.Length;i++)            
+            {
+                if (Regex.IsMatch(s[i].ToString(), @"^[a-zA-Z]+$"))
+                {
+                    if (Regex.IsMatch(s[i].ToString(), @"^[a-z]+$"))
+                    {
+                        int index = s[i] + newK;
+                        if (index <= 122)
+                        {
+                            rotatedCharArray[i]=(char)index;
+                        }
+                        else
+                        {
+                            rotatedCharArray[i] = (char)(index - 122 + 97 - 1);
+                        }
+                    } 
+                    if (Regex.IsMatch(s[i].ToString(), @"^[A-Z]+$"))
+                    {
+                        int index = s[i] + newK;
+                        if (index <= 90)
+                        {
+                            rotatedCharArray[i] = (char)index;
+                        }
+                        else
+                        {
+                            rotatedCharArray[i] = (char)(index - 90 + 65 - 1);
+                        }
+                    }
+                }
+                else
+                {
+                    rotatedCharArray[i] = s[i];
+                }                
+            }
+            string resutlString = new string(rotatedCharArray);
+            return resutlString;
+        }
+    }
+}
