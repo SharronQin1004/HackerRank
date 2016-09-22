@@ -1,0 +1,36 @@
+using System;
+using System.Collections.Generic;
+using System.Linq;
+using System.Text;
+using System.Text.RegularExpressions;
+using System.Threading.Tasks;
+
+namespace ConsoleApplication1
+{
+    class Program
+    {
+        static void Main(string[] args)
+        {
+            string[] tokens_x1 = Console.ReadLine().Split(' ');
+            int x1 = Convert.ToInt32(tokens_x1[0]);
+            int v1 = Convert.ToInt32(tokens_x1[1]);
+            int x2 = Convert.ToInt32(tokens_x1[2]);
+            int v2 = Convert.ToInt32(tokens_x1[3]);            
+            Console.WriteLine(MeetFinally(x1, v1, x2, v2));
+            Console.ReadKey();
+        }
+
+        private static string MeetFinally(int x1, int v1, int x2, int v2)
+        {
+            string canCatchUp = "NO";
+            for (int i = 1; i <= 10000; i++)
+            {
+                if (x1+v1*i==x2+v2*i)
+                {
+                    canCatchUp = "YES";
+                }
+            }
+            return canCatchUp;
+        }
+    }
+}
