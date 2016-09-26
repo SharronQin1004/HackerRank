@@ -1,0 +1,55 @@
+using System;
+using System.Collections.Generic;
+using System.Linq;
+using System.Text;
+using System.Text.RegularExpressions;
+using System.Threading.Tasks;
+
+namespace ConsoleApplication1
+{
+    class Program
+    {
+        static void Main(string[] args)
+        {
+            int caseNumber = Convert.ToInt16(Console.ReadLine());
+            int stoneNumber=0;
+            int a=0;
+            int b=0;
+            for (int i = 0; i < caseNumber; i++)
+            {
+                stoneNumber = Convert.ToInt16(Console.ReadLine());
+                a = Convert.ToInt16(Console.ReadLine());
+                b = Convert.ToInt16(Console.ReadLine());
+                List<int> resultArray = GetLastStone(stoneNumber, a, b);
+                resultArray.ForEach(x => Console.Write(x.ToString() + " "));
+                Console.WriteLine();
+            }
+        }
+
+        private static List<int> GetLastStone(int stoneNumber, int a, int b)
+        {
+            List<int> sb = new List<int>();           
+
+            if (a > b)
+            {
+                int temp = a;
+                a = b;
+                b = temp;
+            }
+                       
+            int minVal = (--stoneNumber) * a;
+            int dval = b - a;
+
+            sb.Add(minVal);           
+            if (dval > 0)
+            {
+                while (stoneNumber-- > 0)
+                {
+                    sb.Add(minVal += dval);
+                }
+            }
+            sb.Sort();
+            return sb;
+        }
+    }
+}
